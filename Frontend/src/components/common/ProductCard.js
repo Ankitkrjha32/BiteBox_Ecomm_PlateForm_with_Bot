@@ -26,8 +26,13 @@ const ProductCard = ({ product }) => {
                         <p className="text-base md:text-2xl text-[#74B83E] leading-3 font-semibold">
                             {"\u20B9"} {/* rupee symbol */}
                             {(
+
+
+
                                 product.price -
                                 product.price * (product.discount / 100)
+
+                                
                             ).toFixed(2)}
                         </p>
                     </div>
