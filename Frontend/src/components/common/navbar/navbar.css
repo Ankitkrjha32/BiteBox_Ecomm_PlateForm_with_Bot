@@ -1,0 +1,8 @@
+.navbar {
+    .nav-item:hover .under-highlight {
+        /* display: block; */
+        opacity: 1;
+        transition: all 100 ease;
+    }
+
+}
