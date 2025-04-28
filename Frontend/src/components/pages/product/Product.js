@@ -31,6 +31,10 @@ const Product = () => {
         const fetchProduct = async () => {
             try {
                 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+
+
+                // const BACKEND_URL = "http://localhost:5000";
                 const response = await axios.get(
                     `${BACKEND_URL}/api/v1/products/product/${id}`
                 );
