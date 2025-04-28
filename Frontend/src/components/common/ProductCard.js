@@ -9,6 +9,9 @@ const ProductCard = ({ product }) => {
             <Link
                 to={`/product/${product.productId}`}
                 className="gap-2 flex flex-col">
+
+
+                   {/* ///// // working in t0                 */}
                 <img
                     alt={`${product.name} logo`}
                     src={product.imageurl}
