@@ -10,6 +10,23 @@ const Product = () => {
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
 
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Fetch product details from the backend using the product ID from the URL
+
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -27,6 +44,8 @@ const Product = () => {
         fetchProduct();
     }, [id]);
 
+
+    // Check if the product is not found
     return (
         <div className="bg-[#ecffe9] pb-40">
             <div className="w-11/12 sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
