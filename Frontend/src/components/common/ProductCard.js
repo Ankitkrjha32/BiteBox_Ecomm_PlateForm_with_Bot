@@ -32,7 +32,10 @@ const ProductCard = ({ product }) => {
                                 product.price -
                                 product.price * (product.discount / 100)
 
-                                
+
+                                //disiounct price calculation
+
+
                             ).toFixed(2)}
                         </p>
                     </div>
