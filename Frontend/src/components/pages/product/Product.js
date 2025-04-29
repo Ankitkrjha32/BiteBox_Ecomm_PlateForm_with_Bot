@@ -43,6 +43,9 @@ const Product = () => {
                 console.error(error);
             } finally {
                 setLoading(false);
+
+
+                // Set loading to false after fetching data
             }
         };
         fetchProduct();
