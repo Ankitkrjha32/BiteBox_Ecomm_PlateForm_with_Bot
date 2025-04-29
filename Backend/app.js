@@ -7,9 +7,9 @@ const app = express();
 
 // Middleware Setup
 const corsOptions = {
-    origin: ["http://localhost:3000", "*"], // Allow your frontend domain and others
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+  origin: ["http://localhost:3000", "*"], //
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
