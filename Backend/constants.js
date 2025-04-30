@@ -1,1 +1,1 @@
-export const DB_NAME = "BITEBOX";
+export const DB_NAME = "Bite-box";
