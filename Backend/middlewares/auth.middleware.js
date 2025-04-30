@@ -16,6 +16,20 @@ export const verifyJWT = async (req, res, next) => {
             });
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //yes
         // check is token is correct
         // keep it outside the try and catch block as it is required later on outside the try and catch block and keep it let instea of const
         let decoded = null;
