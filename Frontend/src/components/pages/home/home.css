@@ -1,0 +1,40 @@
+
+/* media query */
+@media (max-width: 768px) {
+    .hero {
+        background-image: url('../../../utils//images/hero/hero-bg-mobile.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero {
+        background-image: url('../../../utils//images/hero/hero-bg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: left;
+    }
+    
+}
+
+
+
+
+.shimmer {
+    animation: shimmer 1.5s infinite;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+
+ 

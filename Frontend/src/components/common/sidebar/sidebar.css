@@ -1,0 +1,19 @@
+/* Sidebar Parent styles - Controls the transition */
+.sidebar-parent {
+    right: -100%;
+    width: 70%;
+    height: 100dvh;
+    position: absolute;
+    opacity: 0;
+    transition: 400ms ease-in-out;
+    border: 2px solid #5D8B2C;
+    overflow: hidden;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+/* When the sidebar is active, it slides in from the right */
+.sidebar-parent.active {
+    right: 0; /* Move the sidebar into view */
+    opacity: 1; /* Make it visible */
+}
