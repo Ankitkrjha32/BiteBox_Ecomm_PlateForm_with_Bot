@@ -16,6 +16,7 @@ import Signup from "./components/pages/auth/Signup";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import Unauthenticated from "./routes/Unauthenticated";
 import UserProvider from "./context/UserContext";
+import Cart from "./components/pages/cart/cart";
 
 function App() {
     const [isSidebarActive, setIsSidebarActive] = useState(false);
@@ -87,6 +88,7 @@ function App() {
                             {/* Protected Routes - Only Accessible When Logged In */}
                             <Route element={<ProtectedRoutes />}>
                                 {/* <Route path="/profile" element={<div>Dashboard</div>} /> */}
+                                <Route path="/cart" element={<Cart />} />
                             </Route>
 
                         </Routes>

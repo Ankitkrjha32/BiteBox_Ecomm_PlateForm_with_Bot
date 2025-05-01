@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Toaster } from "react-hot-toast"; // Import Toaster for notifications
 import ProductCard from "./components/ProductCard";
 import ProductCardSkeleton from "./components/ProductCardSkeleton";
 import RecommendedProduct from "./components/RecommendProduct";
@@ -30,6 +31,7 @@ const Product = () => {
 
     return (
         <div className="bg-[#ecffe9] pb-40">
+            <Toaster position="top-center" reverseOrder={false} /> {/* Add Toaster component */}
             <div className="w-11/12 sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
                 {loading ? (
                     <ProductCardSkeleton />

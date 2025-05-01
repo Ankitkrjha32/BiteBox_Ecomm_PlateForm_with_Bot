@@ -59,7 +59,9 @@ const Header = ({ setIsSidebarActive, isSidebarActive, headerRef }) => {
             <div className="flex gap-4 items-center">
                 {/* Cart */}
                 <div>
-                    <img src={cart} alt="Cart" className="h-12" />
+                    <Link to={isUserLoggedIn ? "/cart" : "/login"} className="">
+                        <img src={cart} alt="Cart" className="h-12" />
+                    </Link>
                 </div>
                 {/* User */}
                 <div>

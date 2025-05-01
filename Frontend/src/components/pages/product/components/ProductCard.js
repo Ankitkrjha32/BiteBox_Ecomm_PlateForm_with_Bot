@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Rating } from "@mui/material";
+import axios from "axios";
+import { toast } from "react-hot-toast"; // Assuming you're using react-hot-toast for notifications
 
 const ProductCard = ({ product }) => {
     // Destructure product details
     const {
+        _id, // Need product ID for cart operations
         name,
         price,
         category,
@@ -20,6 +23,7 @@ const ProductCard = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const [isHovering, setIsHovering] = useState(false);
     const [magnifyStyle, setMagnifyStyle] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
     // Handlers for incrementing and decrementing
     const handleIncrement = () => {
@@ -44,6 +48,55 @@ const ProductCard = ({ product }) => {
             backgroundImage: `url(${imageurl})`,
             backgroundPosition: `${x}% ${y}%`,
         });
+    };
+
+    const handleAddToCart = async () => {
+        try {
+            setIsLoading(true);
+            const backendUrl = process.env.REACT_APP_BACKEND_URL;
+            
+            // Get token from cookie or local storage
+            const token = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('accessToken='))
+                ?.split('=')[1];
+            
+            if (!token) {
+                toast.error("Please login to add items to cart");
+                setIsLoading(false);
+                // Optionally redirect to login page
+                // history.push('/login');
+                return;
+            }
+
+            const response = await axios.post(
+                `${backendUrl}/api/v1/users/cart`,
+                {
+                    productId: _id,
+                    quantity: quantity
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                toast.success("Product added to cart successfully!");
+            } else {
+                toast.error("Failed to add product to cart");
+            }
+        } catch (error) {
+            console.error("Error adding product to cart:", error);
+            if (error.response?.status === 401) {
+                toast.error("Please login to add items to cart");
+            } else {
+                toast.error(error.response?.data?.message || "Failed to add product to cart");
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -145,8 +198,16 @@ const ProductCard = ({ product }) => {
                             </button>
                         </div>
                         {/* add to cart button */}
-                        <button className="bg-[#74B83E] text-white text-2xl font-semibold h-12 rounded-md hover:bg-[#81cb44] transition-all duration-300 lg:w-48 lg:h-12 lg:text-2xl sm:w-48 sm:h-12 sm:text-2xl md:w-40 md:h-10 md:text-xl w-full">
-                            Add to Cart
+                        <button 
+                            className={`${
+                                isLoading 
+                                ? "bg-gray-400 cursor-not-allowed" 
+                                : "bg-[#74B83E] hover:bg-[#81cb44]"
+                            } text-white text-2xl font-semibold h-12 rounded-md transition-all duration-300 lg:w-48 lg:h-12 lg:text-2xl sm:w-48 sm:h-12 sm:text-2xl md:w-40 md:h-10 md:text-xl w-full`}
+                            onClick={handleAddToCart}
+                            disabled={isLoading}
+                        >
+                            {isLoading ? "Adding..." : "Add to Cart"}
                         </button>
                     </div>
                 </div>
