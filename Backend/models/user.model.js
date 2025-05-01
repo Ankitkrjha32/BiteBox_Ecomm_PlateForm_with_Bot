@@ -46,7 +46,12 @@ const userSchema = new mongoose.Schema(
                 type: String,
             },
         },
-        cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+        cart: [
+            { 
+                product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+                quantity: { type: Number, default: 1 }
+            }
+        ],
         orderHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
 
         refreshToken: {

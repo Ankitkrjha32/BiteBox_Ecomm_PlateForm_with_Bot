@@ -255,4 +255,214 @@ const logout = async (req, res) => {
     }
 };
 
-export { signUp, login, refreshAccessToken, logout };
+// Add a product to user's cart
+const addToCart = async (req, res) => {
+    try {
+        console.log("Adding product to cart...");
+        const userId = req.user._id;
+        const { productId, quantity } = req.body;
+
+        // Validate inputs
+        if (!productId || !quantity || quantity <= 0) {
+            return res.status(400).json({
+                message: "Product ID and valid quantity are required",
+                status: 400,
+                success: false,
+            });
+        }
+
+        // Find the user
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                status: 404,
+                success: false,
+            });
+        }
+
+        // Check if product already exists in cart
+        const existingCartItemIndex = user.cart.findIndex(
+            (item) => item.product.toString() === productId
+        );
+
+        if (existingCartItemIndex >= 0) {
+            // Update quantity if product already exists
+            user.cart[existingCartItemIndex].quantity += parseInt(quantity);
+        } else {
+            // Add new product to cart
+            user.cart.push({
+                product: productId,
+                quantity: parseInt(quantity)
+            });
+        }
+
+        // Save the updated user document
+        await user.save();
+
+        return res.status(200).json({
+            message: "Product added to cart successfully",
+            cart: user.cart,
+            status: 200,
+            success: true,
+        });
+    } catch (error) {
+        console.error("Error adding product to cart:", error);
+        return res.status(500).json({
+            message: "Error adding product to cart",
+            error: error.message,
+            status: 500,
+            success: false,
+        });
+    }
+};
+
+
+const getCart = async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        // Find the user and populate the cart with product details
+        const user = await User.findById(userId).populate("cart.product");
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                status: 404,
+                success: false,
+            });
+        }
+
+        return res.status(200).json({
+            message: "Cart retrieved successfully",
+            cart: user.cart,
+            status: 200,
+            success: true,
+        });
+    } catch (error) {
+        console.error("Error retrieving cart:", error);
+        return res.status(500).json({
+            message: "Error retrieving cart",
+            error: error.message,
+            status: 500,
+            success: false,
+        });
+    }
+};
+
+const deleteCartItem = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const { productId } = req.params;
+
+        // Validate inputs
+        if (!productId) {
+            return res.status(400).json({
+                message: "Product ID is required",
+                status: 400,
+                success: false,
+            });
+        }
+
+        // Find the user
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                status: 404,
+                success: false,
+            });
+        }
+
+        // Remove the product from the cart
+        user.cart = user.cart.filter(
+            (item) => item.product.toString() !== productId
+        );
+
+        // Save the updated user document
+        await user.save();
+
+        return res.status(200).json({
+            message: "Product removed from cart successfully",
+            cart: user.cart,
+            status: 200,
+            success: true,
+        });
+    } catch (error) {
+        console.error("Error removing product from cart:", error);
+        return res.status(500).json({
+            message: "Error removing product from cart",
+            error: error.message,
+            status: 500,
+            success: false,
+        });
+    }
+};
+
+
+const updateCartItem = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const { productId } = req.params;
+        const { quantity } = req.body;
+
+        // Validate inputs
+        if (!productId || !quantity || quantity <= 0) {
+            return res.status(400).json({
+                message: "Product ID and valid quantity are required",
+                status: 400,
+                success: false,
+            });
+        }
+
+        // Find the user
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                status: 404,
+                success: false,
+            });
+        }
+
+        // Check if product exists in cart
+        const existingCartItemIndex = user.cart.findIndex(
+            (item) => item.product.toString() === productId
+        );
+
+        if (existingCartItemIndex < 0) {
+            return res.status(404).json({
+                message: "Product not found in cart",
+                status: 404,
+                success: false,
+            });
+        }
+
+        // Update quantity
+        user.cart[existingCartItemIndex].quantity = parseInt(quantity);
+
+        // Save the updated user document
+        await user.save();
+
+        return res.status(200).json({
+            message: "Product quantity updated successfully",
+            cart: user.cart,
+            status: 200,
+            success: true,
+        });
+    } catch (error) {
+        console.error("Error updating product quantity in cart:", error);
+        return res.status(500).json({
+            message: "Error updating product quantity in cart",
+            error: error.message,
+            status: 500,
+            success: false,
+        });
+    }
+}
+
+
+export { signUp, login, refreshAccessToken, logout, addToCart, getCart, deleteCartItem, updateCartItem };
