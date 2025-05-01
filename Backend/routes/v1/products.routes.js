@@ -8,6 +8,7 @@ import {
     getProductByCategory,
     getAllProductsStructuredByCategory,
     updateProductPrices,
+    productChatbot,
 } from "../../controllers/product.controller.js";
 
 // Example product routes
@@ -25,5 +26,7 @@ router.route("/category/:category").get(getProductByCategory);
 router.route("/structured").get(getAllProductsStructuredByCategory);
 
 router.route("/update-prices").put(updateProductPrices);
+
+router.route("/chatbot").post(productChatbot);
 
 export default router;

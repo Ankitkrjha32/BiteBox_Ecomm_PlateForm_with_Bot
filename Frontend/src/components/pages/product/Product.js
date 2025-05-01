@@ -4,6 +4,7 @@ import axios from "axios";
 import ProductCard from "./components/ProductCard";
 import ProductCardSkeleton from "./components/ProductCardSkeleton";
 import RecommendedProduct from "./components/RecommendProduct";
+import Chatbot from "./components/Chatbot";
 
 const Product = () => {
     const [product, setProduct] = useState(null);
@@ -43,6 +44,7 @@ const Product = () => {
             <div className="mt-40 sm:mt-52 sample">
                 <RecommendedProduct />
             </div>
+            <Chatbot productDetails={product} />
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Product } from "../models/product.models.js";
 import { capitalizeWords } from "../helper/capitalizeWords.js";
+import { chatbotCall } from "../helper/chatbotCall.js";
 
 const getAllProducts = async (req, res) => {
     try {
@@ -241,6 +242,26 @@ const updateProductPrices = async (req, res) => {
     }
 };
 
+
+const productChatbot = async (req, res) => {
+    try {
+        const { productDetails, question } = req.body;
+        const response = await chatbotCall(productDetails, question);
+        return res.status(200).json({
+            message: "Chatbot response",
+            response: response,
+            status: 200,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            status: 500,
+            error: error.message,
+        });
+    }
+};
+
 export {
     getAllProducts,
     getProductById,
@@ -248,4 +269,5 @@ export {
     getProductByCategory,
     getAllProductsStructuredByCategory,
     updateProductPrices,
+    productChatbot,
 };
