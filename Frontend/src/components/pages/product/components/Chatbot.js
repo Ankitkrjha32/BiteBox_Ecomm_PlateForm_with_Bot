@@ -72,7 +72,9 @@ const Chatbot = ({ productDetails }) => {
     <div className="fixed bottom-5 right-5 z-50 font-sans">
       {/* Chatbot toggle button */}
       <button 
-        className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl transition-all duration-300 ease-in-out hover:scale-105 ${isOpen ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'} text-white`}
+        className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl transition-all duration-300 ease-in-out hover:scale-105 ${
+          isOpen ? 'bg-red-500 hover:bg-red-600' : 'bg-[#77b82a] hover:bg-[#69a424]'
+        } text-white`}
         onClick={toggleChatbot}
       >
         {isOpen ? <FaTimes /> : <FaComments />}
@@ -81,20 +83,20 @@ const Chatbot = ({ productDetails }) => {
       {/* Chatbot dialog */}
       {isOpen && (
         <div className="absolute bottom-20 right-0 w-[350px] h-[500px] bg-white rounded-xl shadow-xl flex flex-col overflow-hidden transition-all duration-300 ease-in-out">
-          <div className="px-5 py-4 bg-blue-500 text-white flex justify-between items-center rounded-t-xl">
-            <h3 className="m-0 text-lg font-medium">Product Assistant</h3>
+          <div className="px-5 py-4 bg-[#77b82a] text-white flex justify-between items-center rounded-t-xl">
+            <h3 className="m-0 text-lg font-medium">BITEBOX Assistant</h3>
             <button className="bg-transparent border-none text-white text-lg cursor-pointer" onClick={toggleChatbot}>
               <FaTimes />
             </button>
           </div>
           
-          <div className="flex-1 p-5 overflow-y-auto flex flex-col gap-4 bg-gray-50">
+          <div className="flex-1 p-5 overflow-y-auto flex flex-col gap-4 bg-[#f2fae8]">
             {messages.map((msg, index) => (
               <div key={index} className={`flex mb-3 ${msg.sender === 'bot' ? 'justify-start' : 'justify-end'}`}>
                 <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed
                   ${msg.sender === 'bot' 
-                    ? 'bg-blue-100 text-gray-800 rounded-bl-sm' 
-                    : 'bg-blue-500 text-white rounded-br-sm'}`}
+                    ? 'bg-[#e4f3d3] text-gray-800 rounded-bl-sm' 
+                    : 'bg-[#77b82a] text-white rounded-br-sm'}`}
                 >
                   {msg.text}
                 </div>
@@ -102,24 +104,24 @@ const Chatbot = ({ productDetails }) => {
             ))}
             {isLoading && (
               <div className="flex justify-start mb-3">
-                <div className="flex items-center h-8 min-w-[60px] bg-blue-100 px-4 py-3 rounded-2xl rounded-bl-sm">
-                  <span className="h-2 w-2 bg-gray-500 rounded-full opacity-40 mx-0.5 animate-bounce" style={{ animationDelay: '0.2s' }}></span>
-                  <span className="h-2 w-2 bg-gray-500 rounded-full opacity-40 mx-0.5 animate-bounce" style={{ animationDelay: '0.4s' }}></span>
-                  <span className="h-2 w-2 bg-gray-500 rounded-full opacity-40 mx-0.5 animate-bounce" style={{ animationDelay: '0.6s' }}></span>
+                <div className="flex items-center h-8 min-w-[60px] bg-[#e4f3d3] px-4 py-3 rounded-2xl rounded-bl-sm">
+                  <span className="h-2 w-2 bg-[#77b82a] rounded-full opacity-40 mx-0.5 animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+                  <span className="h-2 w-2 bg-[#77b82a] rounded-full opacity-40 mx-0.5 animate-bounce" style={{ animationDelay: '0.4s' }}></span>
+                  <span className="h-2 w-2 bg-[#77b82a] rounded-full opacity-40 mx-0.5 animate-bounce" style={{ animationDelay: '0.6s' }}></span>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
           
-          <form className="p-3 flex border-t border-gray-200 bg-white" onSubmit={handleSendMessage}>
+          <form className="p-3 flex border-t border-[#e4f3d3] bg-white" onSubmit={handleSendMessage}>
             <input
               type="text"
               value={currentMessage}
               onChange={(e) => setCurrentMessage(e.target.value)}
-              placeholder="Type your question here..."
+              placeholder="Ask about this product..."
               disabled={isLoading}
-              className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm outline-none focus:border-blue-500 transition-colors"
+              className="flex-1 border border-[#cce5af] rounded-full px-4 py-2 text-sm outline-none focus:border-[#77b82a] transition-colors"
             />
             <button 
               type="submit" 
@@ -127,7 +129,7 @@ const Chatbot = ({ productDetails }) => {
               className={`w-10 h-10 rounded-full border-none ml-2 flex items-center justify-center transition-colors
                 ${isLoading || !currentMessage.trim() 
                   ? 'bg-gray-300 cursor-not-allowed' 
-                  : 'bg-blue-500 hover:bg-blue-600 cursor-pointer'} text-white`}
+                  : 'bg-[#77b82a] hover:bg-[#69a424] cursor-pointer'} text-white`}
             >
               <FaPaperPlane className="text-sm" />
             </button>
