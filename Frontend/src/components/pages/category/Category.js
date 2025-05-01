@@ -62,7 +62,7 @@ const Category = () => {
                     setLoading(false);
                     setContentNotFound(false);
                 } else {
-                    console.log("No Product found here");
+                    console.log("No Product found");
                     setProducts([]);
                     setContentNotFound(true);
                 }

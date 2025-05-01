@@ -10,31 +10,10 @@ const Product = () => {
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Fetch product details from the backend using the product ID from the URL
-
-
     useEffect(() => {
         const fetchProduct = async () => {
             try {
                 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
-
-
-                // const BACKEND_URL = "http://localhost:5000";
                 const response = await axios.get(
                     `${BACKEND_URL}/api/v1/products/product/${id}`
                 );
@@ -43,16 +22,11 @@ const Product = () => {
                 console.error(error);
             } finally {
                 setLoading(false);
-
-
-                // Set loading to false after fetching data
             }
         };
         fetchProduct();
     }, [id]);
 
-
-    // Check if the product is not found
     return (
         <div className="bg-[#ecffe9] pb-40">
             <div className="w-11/12 sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto">

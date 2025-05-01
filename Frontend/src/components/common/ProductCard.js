@@ -9,9 +9,6 @@ const ProductCard = ({ product }) => {
             <Link
                 to={`/product/${product.productId}`}
                 className="gap-2 flex flex-col">
-
-
-                   {/* ///// // working in t0                 */}
                 <img
                     alt={`${product.name} logo`}
                     src={product.imageurl}
@@ -29,16 +26,8 @@ const ProductCard = ({ product }) => {
                         <p className="text-base md:text-2xl text-[#74B83E] leading-3 font-semibold">
                             {"\u20B9"} {/* rupee symbol */}
                             {(
-
-
-
                                 product.price -
                                 product.price * (product.discount / 100)
-
-
-                                //disiounct price calculation
-
-
                             ).toFixed(2)}
                         </p>
                     </div>
