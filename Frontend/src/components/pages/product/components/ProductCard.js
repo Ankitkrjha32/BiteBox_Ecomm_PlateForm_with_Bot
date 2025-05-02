@@ -56,10 +56,7 @@ const ProductCard = ({ product }) => {
             const backendUrl = process.env.REACT_APP_BACKEND_URL;
             
             // Get token from cookie or local storage
-            const token = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('accessToken='))
-                ?.split('=')[1];
+            const token = localStorage.getItem('accessToken');
             
             if (!token) {
                 toast.error("Please login to add items to cart");

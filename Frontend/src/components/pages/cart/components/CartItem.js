@@ -15,10 +15,8 @@ const CartItem = ({ item, onUpdateCart, onRemoveItem }) => {
     setIsUpdating(true);
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('accessToken='))
-        ?.split('=')[1];
+      const token = localStorage.getItem('accessToken');
+
       
       if (!token) {
         toast.error("Authentication error");
@@ -47,10 +45,8 @@ const CartItem = ({ item, onUpdateCart, onRemoveItem }) => {
     setIsUpdating(true);
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('accessToken='))
-        ?.split('=')[1];
+      const token = localStorage.getItem('accessToken');
+
       
       if (!token) {
         toast.error("Authentication error");
