@@ -17,6 +17,14 @@ const Cart = () => {
     try {
       setLoading(true);
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      // getMe
+      const res = await axios.get(`${backendUrl}/api/v1/users/me`, { withCredentials: true });
+      if (res.status !== 200) {
+        setError("Please log in to view your cart");
+        setLoading(false);
+        return;
+      }
+
       const token = document.cookie
         .split('; ')
         .find(row => row.startsWith('accessToken='))
