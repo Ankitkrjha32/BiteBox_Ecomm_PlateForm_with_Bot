@@ -18,17 +18,14 @@ const Cart = () => {
       setLoading(true);
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
       // getMe
-      const res = await axios.get(`${backendUrl}/api/v1/users/me`, { withCredentials: true });
-      if (res.status !== 200) {
-        setError("Please log in to view your cart");
-        setLoading(false);
-        return;
-      }
+      // const res = await axios.get(`${backendUrl}/api/v1/users/me`, { withCredentials: true });
+      // if (res.status !== 200) {
+      //   setError("Please log in to view your cart");
+      //   setLoading(false);
+      //   return;
+      // }
 
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('accessToken='))
-        ?.split('=')[1];
+      const token = localStorage.getItem('accessToken');
       
       if (!token) {
         setError("Please log in to view your cart");
