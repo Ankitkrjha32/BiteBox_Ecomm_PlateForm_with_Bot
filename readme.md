@@ -95,9 +95,6 @@ Bite-Box is a full-stack food delivery application that connects users with rest
    ```
    The server will run at http://localhost:5000
 
-## Authors
-
-- **Anupam** - [9582anupam](https://github.com/9582anupam)
 
 ## License
 
