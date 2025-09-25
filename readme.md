@@ -5,7 +5,7 @@ Bite-Box is a full-stack food delivery application that connects users with rest
 
 ## Features
 
-### User Authentication
+### User Authentication.
 - User registration and login functionality
 - Secure authentication with JWT access tokens and refresh tokens
 - Protected routes for authenticated users
